@@ -7,6 +7,10 @@ import Thought from "./Thought";
 function App() {
   const [thoughts, setThoughts] = useState([]);
   const addThought = (thought) => setThoughts((prev) => [thought, ...prev]);
+  const removeThought = (thoughtIdRemove) =>
+    setThoughts((thoughts) =>
+      thoughts.filter((thought) => thought.id !== thoughtIdRemove)
+    );
   return (
     <div className="App">
       <header>
@@ -16,7 +20,11 @@ function App() {
       <main>
         <ul className="thoughts">
           {thoughts.map((thought) => (
-            <Thought key={thought.id} thought={thought} />
+            <Thought
+              key={thought.id}
+              thought={thought}
+              removeThought={removeThought}
+            />
           ))}
         </ul>
       </main>
